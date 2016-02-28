@@ -54,7 +54,7 @@ baseurl: ""
 #
 
 markdown: redcarpet
-highlighter: rouge
+highlighter: kramdown
 permalink: /:title/
 
 # The release of Jekyll Now that you're using
