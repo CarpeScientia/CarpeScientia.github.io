@@ -2,10 +2,10 @@
 layout: post
 title: Create your own Androidpay tokens
 ---
-### Androidpay
-
 Androidpay is Google's answer to Apple's attempt to dominate the mobile payment market with its Applepay brand. A market which is wide open in America with its massive meltdown of credit card security, with breach after breach of payment systems.
 The Credit Card companies are now scrambling to replace the ancient magnetic stripe cards  which are costing them [billions](http://www.creditcards.com/credit-card-news/credit-card-security-id-theft-fraud-statistics-1276.php) yearly in fraud. There are many possible technologies ready to replace them, [EMV](https://www.emvco.com/) being the most widely used.
+
+### Two ways to pay
 
 Both Applepay and Androidpay do the same thing, they wrap the credit card data with an extra layer of security. With both Applepay and Androidpay you can pay in two different ways.
 Either at a payment (POS) terminal in physical store or online with an App or website on your mobile phone.
