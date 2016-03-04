@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I am a Developer working with payment systems.
+I am a Developer working on payment systems.
 I have worked with Hardware Security Modules (HSMs), Applepay, Androidpay, iOS, POS, security and other payment stuff.
 
 ### Contact me

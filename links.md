@@ -6,4 +6,4 @@ permalink: /links/
 
 These are some of my learned colleagues
 
-![Programming Life](http://programminglife.io/)
+[Programming Life](http://programminglife.io/)
