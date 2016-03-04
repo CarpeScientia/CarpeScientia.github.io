@@ -6,7 +6,7 @@
 name: CarpeScientia
 
 # Short bio or description (displayed in the header)
-description: Round-all Developer
+description: Random Useful Stuff for Developers
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://carpescientia.github.io/images/dont-panic.jpg
@@ -23,10 +23,10 @@ footer-links:
   flickr:
   github: github.com/CarpeScientia
   instagram:
-  linkedin:
+  linkedin: https://nl.linkedin.com/in/bouke-de-vries-5470a419
   pinterest:
   rss: # just type anything here for a working RSS icon
-  twitter: jekyllrb
+  twitter:
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/

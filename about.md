@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+I am a Developer working with payment systems.
+I have worked with Hardware Security Modules (HSMs), Applepay, Androidpay, iOS, POS, security and other payment stuff.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[carpescientiaatgithub@gmail.com](mailto:carpescientiaatgithub@gmail.com)
