@@ -18,12 +18,15 @@ Google provides excellent [documentation](https://developers.google.com/android-
 When you need to create your own test tokens or recrypt existing tokens you can use their example decryption code. All you need to do is invert the encryption steps.+
 
 Instead of creating a PublicKey from the ephemeralPublicKeyBytes of the token you create one from the same public key string that you use in the PaymentMethodTokenizationParameters in the MaskedWalletRequest of your App.
+
 ``` java
 publicKey = asymmetricKeyFactory.generatePublic(new ECPublicKeySpec( ECPointUtil.decodePoint(asymmetricKeyParams.getCurve(),
 																																														 publicKeyBytes),
 																																													 asymmetricKeyParams));
 ```
+
 Instead of reconstructing the Ephemeral Public Key you generate it.
+
 ``` java
 KeyPairGenerator gen = KeyPairGenerator.getInstance(ASYMMETRIC_KEY_TYPE, SECURITY_PROVIDER);
 gen.initialize(asymmetricKeyParams);//set the curve
@@ -31,6 +34,7 @@ ephemerals = gen.generateKeyPair();
 ```
 
 Then you use those as inputs for the DiffieHelman Key Agreement
+
 ``` java
 keyAgreement.init(ephemerals.getPrivate());
 keyAgreement.doPhase(publicKey, true);
@@ -38,6 +42,7 @@ keyAgreement.doPhase(publicKey, true);
 
 The derivation of the MAC and Encryption stays the same since they are symmetric keys.
 All that is left is to set the Encryption Cipher mode to ENCRYPT and generate the MAC from its output as a last step.
+
 ``` java
 cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptionKey, SYMMETRIC_KEY_TYPE), new IvParameterSpec(SYMMETRIC_IV));
 ```
