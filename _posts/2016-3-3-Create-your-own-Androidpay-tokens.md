@@ -15,7 +15,32 @@ If you pay at a POS terminal you are basically using [EMV-NFC](http://www.smartc
 
 When paying with an App or website on your phone your Credit Card details are encrypted in a unique way that Google designed. This encrypted Card is called a payment token.
 Google provides excellent [documentation](https://developers.google.com/android-pay/integration/gateway-processor-integration) on how to decrypt their payment tokes.
-When you need to create your own test tokens or recrypt existing tokens you can use their example decryption code. All you need to do is invert the encryption steps.
+When you need to create your own test tokens or recrypt existing tokens you can use their example decryption code. All you need to do is invert the encryption steps.+
+
+Instead of creating a PublicKey from the ephemeralPublicKeyBytes of the token you create one from the same public key string that you use in the PaymentMethodTokenizationParameters in the MaskedWalletRequest of your App.
+``` java
+publicKey = asymmetricKeyFactory.generatePublic(new ECPublicKeySpec( ECPointUtil.decodePoint(asymmetricKeyParams.getCurve(),
+																																														 publicKeyBytes),
+																																													 asymmetricKeyParams));
+```
+Instead of reconstructing the Ephemeral Public Key you generate it.
+``` java
+KeyPairGenerator gen = KeyPairGenerator.getInstance(ASYMMETRIC_KEY_TYPE, SECURITY_PROVIDER);
+gen.initialize(asymmetricKeyParams);//set the curve
+ephemerals = gen.generateKeyPair();
+```
+
+Then you use those as inputs for the DiffieHelman Key Agreement
+``` java
+keyAgreement.init(ephemerals.getPrivate());
+keyAgreement.doPhase(publicKey, true);
+```
+
+The derivation of the MAC and Encryption stays the same since they are symmetric keys.
+All that is left is to set the Encryption Cipher mode to ENCRYPT and generate the MAC from its output as a last step.
+``` java
+cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(encryptionKey, SYMMETRIC_KEY_TYPE), new IvParameterSpec(SYMMETRIC_IV));
+```
 
 ``` java
 import java.nio.charset.Charset;
@@ -86,17 +111,10 @@ public class AndroidPayTokenCreator {
 		try {
 			KeyFactory asymmetricKeyFactory =
 							KeyFactory.getInstance(ASYMMETRIC_KEY_TYPE, SECURITY_PROVIDER);
-/*			Only works for the normal Public Key format not the uncompressed point format
-* 			X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyBytes);
-			publicKey = asymmetricKeyFactory.generatePublic( publicKeySpec);*/
-
-
 			ECParameterSpec asymmetricKeyParams = generateECParameterSpec();
 			publicKey = asymmetricKeyFactory.generatePublic(new ECPublicKeySpec( ECPointUtil.decodePoint(asymmetricKeyParams.getCurve(),
 			                                                                                             publicKeyBytes),
 				                                                                                         asymmetricKeyParams));
-
-
 		} catch (NoSuchAlgorithmException | NoSuchProviderException | InvalidKeySpecException e1) {
 			System.err.println("Failed to create PKCS8Encoded Public Key from keybytes");
 			throw e1;
@@ -210,4 +228,4 @@ public class AndroidPayTokenCreator {
 }
 
 
-``` 
+```
