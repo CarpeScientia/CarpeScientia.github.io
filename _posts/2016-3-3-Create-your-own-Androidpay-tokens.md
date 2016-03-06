@@ -20,9 +20,12 @@ When you need to create your own test tokens or recrypt existing tokens you can 
 Instead of creating a PublicKey from the ephemeralPublicKeyBytes of the token you create one from the same public key string that you use in the PaymentMethodTokenizationParameters in the MaskedWalletRequest of your App.
 
 ``` java
-publicKey = asymmetricKeyFactory.generatePublic(new ECPublicKeySpec( ECPointUtil.decodePoint(asymmetricKeyParams.getCurve(),
-																																														 publicKeyBytes),
-																																													 asymmetricKeyParams));
+publicKey = asymmetricKeyFactory.generatePublic(
+																		new ECPublicKeySpec(
+																					ECPointUtil.decodePoint(
+																							asymmetricKeyParams.getCurve(),
+																							publicKeyBytes),
+																							asymmetricKeyParams));
 ```
 
 Instead of reconstructing the Ephemeral Public Key you generate it.
