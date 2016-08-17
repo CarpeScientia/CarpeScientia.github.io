@@ -9,7 +9,8 @@ Because who needs security anyway?! Only terrorists and wimps! Ok maybe not, but
 The clue is in these few lines that override the default java hostname and certificate verifiers.
 We replace them here with our own versions that trust all input by doing absolutely nothing.
 See their implementation further along in the code.
-[github](https://github.com/CarpeScientia/SuperSimpleHttpsSender.git)
+
+[github link](https://github.com/CarpeScientia/SuperSimpleHttpsSender.git)
 
 ``` java
 			SSLContext sc = SSLContext.getInstance("TLS");
